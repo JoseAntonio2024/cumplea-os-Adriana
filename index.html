@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>🎁Para mi Prima Adriana 🎂</title>
+<style>
+* { box-sizing: border-box; }
+html, body { margin:0; min-height:100%; }
+body {
+    overflow-x:hidden;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, sans-serif;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,.25) 0 3px, transparent 4px),
+      radial-gradient(circle at 80% 30%, rgba(255,255,255,.22) 0 2px, transparent 3px),
+      linear-gradient(135deg,#25105c,#5d1b8f,#e83286,#ff8b38);
+    background-size:80px 80px, 110px 110px, cover;
+    position:relative;
+}
+.screen {
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    position:relative;
+}
+.start {
+    text-align:center;
+    color:white;
+    z-index:5;
+}
+.start h1 {
+    font-size:clamp(30px,9vw,55px);
+    margin:0 0 10px;
+    text-shadow:0 5px 15px rgba(0,0,0,.35);
+}
+.start p { font-size:20px; margin:0 0 28px; }
+.gift {
+    width:150px; height:135px; margin:auto; position:relative;
+    cursor:pointer; animation:bounce 1.5s infinite;
+    filter:drop-shadow(0 15px 15px rgba(0,0,0,.3));
+}
+.box { position:absolute; left:15px; right:15px; bottom:0; height:88px;
+    border-radius:8px; background:linear-gradient(90deg,#ff1744,#ff4f81,#ff1744); }
+.lid { position:absolute; left:7px; right:7px; top:25px; height:28px;
+    border-radius:7px; background:#ff4775; z-index:2; }
+.ribbon-v { position:absolute; left:61px; width:28px; top:25px; bottom:0;
+    background:#ffd21f; z-index:3; }
+.ribbon-h { position:absolute; left:15px; right:15px; top:60px; height:24px;
+    background:#ffd21f; z-index:3; }
+.bow1,.bow2 { position:absolute; top:0; width:52px; height:38px;
+    background:#ffd21f; border-radius:50% 50% 15% 50%; z-index:4; }
+.bow1 { left:28px; transform:rotate(25deg); }
+.bow2 { right:28px; transform:scaleX(-1) rotate(25deg); }
+.center { position:absolute; width:27px; height:27px; left:61px; top:13px;
+    border-radius:50%; background:#ffbe00; z-index:5; }
+.hint { margin-top:25px; font-size:18px; animation:pulse 1s infinite alternate; }
+
+#celebration { display:none; width:100%; min-height:100vh; padding:30px 15px;
+    text-align:center; color:white; position:relative; z-index:2; }
+#celebration.show { display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.title { font-size:clamp(38px,10vw,70px); margin:0 0 10px; font-weight:900;
+    text-shadow:0 4px 0 #ff3b81, 0 8px 20px rgba(0,0,0,.4); animation:pop .8s; }
+.subtitle { font-size:clamp(20px,5vw,30px); margin:0 0 20px; font-weight:bold; }
+.photo {
+    width:min(90vw,430px);
+    max-height:58vh;
+    object-fit:contain;
+    border:8px solid white;
+    border-radius:24px;
+    box-shadow:0 0 0 5px #ffd52a, 0 18px 45px rgba(0,0,0,.45);
+    animation:photoIn 1s ease-out;
+    background:white;
+}
+.message { font-size:clamp(18px,4.8vw,25px); font-weight:bold;
+    margin:20px 0 0; text-shadow:0 2px 8px rgba(0,0,0,.4); }
+.star { position:fixed; pointer-events:none; font-size:28px; z-index:10;
+    animation:fall linear forwards; }
+.confetti { position:fixed; pointer-events:none; width:10px; height:18px;
+    z-index:20; animation:confettiFall linear forwards; }
+.heart { position:fixed; pointer-events:none; font-size:30px; z-index:10;
+    animation:heartFly ease-out forwards; }
+
+@keyframes bounce { 0%,100% { transform:translateY(0) rotate(-2deg); }
+  50% { transform:translateY(-18px) rotate(2deg); } }
+@keyframes pulse { from { transform:scale(1); } to { transform:scale(1.08); } }
+@keyframes pop { 0% { transform:scale(.2) rotate(-10deg); opacity:0; }
+  80% { transform:scale(1.15); } 100% { transform:scale(1); opacity:1; } }
+@keyframes photoIn { from { transform:scale(.3) rotate(-8deg); opacity:0; }
+  to { transform:scale(1) rotate(0); opacity:1; } }
+@keyframes confettiFall { to { transform:translate3d(var(--x),110vh,0) rotate(900deg); opacity:0; } }
+@keyframes fall { from { transform:translateY(-10vh) rotate(0); opacity:1; }
+  to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
+@keyframes heartFly { from { transform:translate(-50%,0) scale(.5); opacity:1; }
+  to { transform:translate(calc(-50% + var(--dx)),var(--dy)) scale(1.4); opacity:0; } }
+</style>
+</head>
+
+<body>
+<div class="screen">
+  <div class="start" id="start">
+    <h1>🎁 ¡Tienes un regalo! 🎁</h1>
+    <p>Adriana, pulsa sobre el regalo para abrirlo(No tengas miedo)...</p>
+    <div class="gift" id="gift" aria-label="Abrir regalo">
+      <div class="bow1"></div><div class="bow2"></div><div class="center"></div>
+      <div class="lid"></div><div class="box"></div>
+      <div class="ribbon-v"></div><div class="ribbon-h"></div>
+    </div>
+    <div class="hint">👆 ¡PÚLSAME! 👆</div>
+  </div>
+
+  <div id="celebration">
+    <h1 class="title">🎉Felices 10 años Adriana 🎉</h1>
+    <div class="subtitle">🎂🥳 ¡ Te quiero mucho! 🥳🎂</div>
+    <img class="photo" src="Niña sonriente con ramo de flores.png" alt="Adriana">
+    <div class="message">⭐ Que todos tus sueños se hagan realidad ⭐<br>❤️ ¡Disfruta muchísimo de tu día! ❤️</div>
+  </div>
+</div>
+
+<script>
+const gift = document.getElementById("gift");
+const start = document.getElementById("start");
+const celebration = document.getElementById("celebration");
+let audioCtx;
+
+function playBirthdaySong() {
+    // Melodía de "Cumpleaños feliz", creada con Web Audio.
+    // Así no hace falta descargar ningún archivo de música.
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+
+    const notes = [
+      [264,.30],[264,.30],[297,.60],[264,.60],[352,.60],[330,1.0],
+      [264,.30],[264,.30],[297,.60],[264,.60],[396,.60],[352,1.0],
+      [264,.30],[264,.30],[528,.60],[440,.60],[352,.60],[330,.60],[297,1.0],
+      [466,.30],[466,.30],[440,.60],[352,.60],[396,.60],[352,1.2]
+    ];
+    let t = audioCtx.currentTime + 0.05;
+    for (const [freq,dur] of notes) {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = "sine";
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.0001,t);
+        gain.gain.exponentialRampToValueAtTime(0.22,t+0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001,t+dur-0.03);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start(t);
+        osc.stop(t+dur);
+        t += dur;
+    }
+}
+
+function burst() {
+    const emojis = ["⭐","🌟","💖","❤️","💙","💚","💛","💜","🧡","💗","✨","🎉"];
+    for(let i=0;i<75;i++) {
+        const e=document.createElement("div");
+        e.className="star";
+        e.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+        e.style.left=(Math.random()*100)+"vw";
+        e.style.top=(-10-Math.random()*30)+"vh";
+        e.style.animationDuration=(2+Math.random()*4)+"s";
+        e.style.animationDelay=(Math.random()*1.5)+"s";
+        document.body.appendChild(e);
+        setTimeout(()=>e.remove(),7000);
+    }
+
+    for(let i=0;i<180;i++) {
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=(Math.random()*100)+"vw";
+        c.style.top=(-20-Math.random()*40)+"px";
+        c.style.background=["#ff1744","#ffd600","#00e5ff","#76ff03","#d500f9","#ff6d00","#ffffff"][Math.floor(Math.random()*7)];
+        c.style.setProperty("--x",(Math.random()*240-120)+"px");
+        c.style.animationDuration=(2.5+Math.random()*4)+"s";
+        c.style.animationDelay=(Math.random()*1.8)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),8000);
+    }
+
+    for(let i=0;i<35;i++) {
+        const h=document.createElement("div");
+        h.className="heart";
+        h.textContent=["❤️","💖","💙","💚","💛","💜"][Math.floor(Math.random()*6)];
+        h.style.left=(20+Math.random()*60)+"vw";
+        h.style.top=(35+Math.random()*25)+"vh";
+        h.style.setProperty("--dx",(Math.random()*500-250)+"px");
+        h.style.setProperty("--dy",(-150-Math.random()*450)+"px");
+        h.style.animationDuration=(1.5+Math.random()*2)+"s";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4500);
+    }
+}
+
+gift.addEventListener("click", () => {
+    start.style.display="none";
+    celebration.classList.add("show");
+    burst();
+    playBirthdaySong();
+});
+
+gift.addEventListener("touchstart", () => {}, {passive:true});
+</script>
+</body>
+</html>
